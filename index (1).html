@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Rashid — Software Engineer</title>
+<meta name="description" content="Muhammad Rashid — Senior PHP/Laravel Developer building SaaS platforms, REST APIs, and marketplace/courier integrations. Lahore, Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1224;
+    --navy-2:#111B32;
+    --navy-line: rgba(255,255,255,0.12);
+    --muted-dark:#93A2C4;
+
+    --white:#FFFFFF;
+    --off:#F4F7FC;
+    --line:#E3E8F1;
+    --ink:#0E1526;
+    --muted:#5D677A;
+
+    --blue:#2A5CE0;
+    --blue-light:#5B8DFF;
+    --blue-pale:#EAF0FE;
+
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--blue);color:#fff;}
+
+  /* scroll progress */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--blue);z-index:100;width:0%;transition:width .1s linear;}
+
+  /* ---------- stamp element (signature) ---------- */
+  .stamp{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1.5px dashed var(--blue-light);
+    color:var(--blue-light);
+    font-family:'Space Mono',monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;
+    padding:6px 12px;border-radius:4px;
+    transform:rotate(-2deg);white-space:nowrap;
+  }
+  .stamp.onlight{border-color:var(--blue);color:var(--blue);}
+  .stamp.muted{border-color:#B8C2D6;color:#7A8598;}
+
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--blue);display:inline-block;}
+  .eyebrow.onlight{color:var(--blue-light);}
+  .eyebrow.onlight::before{background:var(--blue-light);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+  .logo{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;letter-spacing:.05em;display:flex;align-items:center;gap:10px;color:var(--ink);}
+  .logo .tag{font-size:10px;color:var(--blue);border:1px solid var(--blue);padding:2px 6px;border-radius:3px;letter-spacing:.1em;}
+  .navlinks{display:flex;gap:32px;font-size:14px;color:var(--muted);}
+  .navlinks a:hover{color:var(--blue);}
+  .navcta{
+    font-family:'Space Mono',monospace;font-size:12px;
+    background:var(--navy);color:#fff;
+    padding:10px 18px;border-radius:6px;letter-spacing:.05em;
+  }
+  .navcta:hover{background:var(--blue);}
+  .burger{display:none;background:none;border:none;color:var(--ink);font-size:22px;cursor:pointer;}
+
+  @media (max-width:820px){
+    .navlinks{display:none;position:absolute;top:64px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(10,18,36,0.08);}
+    .navlinks.open{display:flex;}
+    .navlinks a{padding:16px 28px;border-bottom:1px solid var(--line);}
+    .navcta{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ---------- hero (dark navy) ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1100px 500px at 85% -10%, rgba(91,141,255,0.18), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#fff;
+    padding:100px 0 74px;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size:28px 28px;pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .route{display:flex;align-items:center;gap:14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--muted-dark);letter-spacing:.08em;text-transform:uppercase;margin-bottom:34px;}
+  .route .node{color:var(--blue-light);}
+  .route .line{flex:1;max-width:120px;height:1px;background-image:linear-gradient(to right, var(--muted-dark) 40%, transparent 0%);background-size:8px 1px;background-repeat:repeat-x;}
+  .hero h1{font-size:clamp(38px,6vw,70px);font-weight:800;line-height:1.06;letter-spacing:-0.02em;max-width:900px;}
+  .hero h1 span{color:var(--blue-light);}
+  .hero .role{font-family:'Space Mono',monospace;color:var(--muted-dark);font-size:15px;margin-top:20px;}
+  .hero p.desc{max-width:600px;margin-top:22px;color:var(--muted-dark);font-size:16px;}
+  .hero-cta{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;align-items:center;}
+  .btn{font-family:'Space Mono',monospace;font-size:13px;padding:14px 24px;border-radius:7px;letter-spacing:.05em;display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease, background .15s ease;}
+  .btn.primary{background:var(--blue);color:#fff;font-weight:700;}
+  .btn.primary:hover{background:var(--blue-light);transform:translateY(-2px);}
+  .btn.ghost{border:1px solid var(--navy-line);color:#fff;}
+  .btn.ghost:hover{border-color:#fff;transform:translateY(-2px);}
+  .hero-meta{display:flex;gap:46px;margin-top:64px;flex-wrap:wrap;}
+  .hero-meta .stat b{display:block;font-size:32px;font-family:'Space Mono',monospace;color:var(--blue-light);}
+  .hero-meta .stat span{font-size:12px;color:var(--muted-dark);text-transform:uppercase;letter-spacing:.1em;}
+
+  /* ---------- section base ---------- */
+  section{padding:90px 0;position:relative;}
+  section.alt{background:var(--off);}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
+  .sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-0.01em;color:var(--ink);}
+  .sec-head p{color:var(--muted);max-width:420px;font-size:14.5px;}
+
+  /* ---------- skills ---------- */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .skill-cat{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:box-shadow .2s ease, transform .2s ease;}
+  .skill-cat:hover{box-shadow:0 14px 30px rgba(10,18,36,0.07);transform:translateY(-3px);}
+  .skill-cat h3{font-family:'Space Mono',monospace;font-size:12px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+  .skill-cat .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-cat .tags span{font-size:12.5px;background:var(--blue-pale);color:var(--navy);padding:6px 11px;border-radius:5px;}
+  @media (max-width:820px){.skill-grid{grid-template-columns:1fr;}}
+
+  /* ---------- projects (manifest cards) ---------- */
+  .manifest{border:1px solid var(--line);background:var(--white);border-radius:var(--radius);margin-bottom:18px;transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;}
+  .manifest:hover{box-shadow:0 18px 34px rgba(10,18,36,0.09);transform:translateY(-3px);border-color:var(--blue-light);}
+  .manifest-top{display:flex;justify-content:space-between;align-items:flex-start;padding:26px 28px 0;flex-wrap:wrap;gap:16px;}
+  .manifest-id{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;}
+  .manifest-body{padding:14px 28px 28px;}
+  .manifest-body h3{font-size:23px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+  .manifest-body p{color:var(--muted);font-size:14.5px;max-width:640px;}
+  .manifest-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .manifest-tags span{font-family:'Space Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-pale);padding:5px 10px;border-radius:5px;}
+
+  .archive-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:14px;}
+  .archive-card{border:1px solid var(--line);padding:20px 22px;background:var(--white);border-radius:var(--radius);transition:box-shadow .2s ease, transform .2s ease;}
+  .archive-card:hover{box-shadow:0 14px 28px rgba(10,18,36,0.07);transform:translateY(-3px);}
+  .archive-card h4{font-size:16px;color:var(--ink);margin-bottom:6px;}
+  .archive-card .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .archive-card .tags span{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--muted);border:1px solid var(--line);padding:4px 8px;border-radius:5px;}
+  .archive-card a.live{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--blue);margin-top:12px;display:inline-block;border-bottom:1px solid var(--blue);}
+  @media (max-width:820px){.archive-grid{grid-template-columns:1fr;}}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{border-left:1px solid var(--line);padding-left:36px;position:relative;}
+  .tl-item{margin-bottom:52px;position:relative;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{content:"";position:absolute;left:-42px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--white);border:2px solid var(--blue);}
+  .tl-date{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+  .tl-item h3{font-size:20px;font-weight:700;color:var(--ink);}
+  .tl-item .company{color:var(--blue);font-size:14px;font-family:'Space Mono',monospace;margin-bottom:14px;}
+  .tl-item ul{padding-left:18px;color:var(--muted);font-size:14.5px;display:flex;flex-direction:column;gap:6px;}
+
+  /* ---------- education ---------- */
+  .edu-card{border:1px solid var(--line);background:var(--white);border-radius:var(--radius);padding:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  .edu-card h3{font-size:19px;color:var(--ink);margin-bottom:4px;}
+  .edu-card .school{color:var(--blue);font-family:'Space Mono',monospace;font-size:13px;}
+  .edu-card .courses{color:var(--muted);font-size:13.5px;margin-top:10px;max-width:520px;}
+  .edu-card .date{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--muted);white-space:nowrap;}
+
+  /* ---------- contact (dark navy, bridges into footer) ---------- */
+  .contact-sec{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#fff;border-bottom:none;
+  }
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .contact-grid h2{color:#fff;}
+  .contact-grid p{color:var(--muted-dark);}
+  .contact-list{display:flex;flex-direction:column;gap:14px;margin-top:10px;}
+  .contact-list a{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--navy-line);border-radius:8px;padding:18px 22px;font-family:'Space Mono',monospace;font-size:14px;color:#fff;transition:border-color .2s ease, background .2s ease;}
+  .contact-list a span{color:var(--muted-dark);}
+  .contact-list a:hover{border-color:var(--blue-light);background:rgba(91,141,255,0.08);}
+  .langs{display:flex;gap:24px;margin-top:30px;flex-wrap:wrap;}
+  .langs .lang b{display:block;font-size:14px;color:#fff;}
+  .langs .lang span{font-size:12px;color:var(--muted-dark);}
+
+  footer{padding:30px 0;text-align:center;color:var(--muted-dark);font-size:12.5px;font-family:'Space Mono',monospace;background:var(--navy-2);border-top:1px solid var(--navy-line);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .btn:hover, .manifest:hover, .skill-cat:hover, .archive-card:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">RD <span class="tag">MR-2026</span></div>
+    <div class="navlinks" id="navlinks">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="navcta">Let's talk</a>
+    <button class="burger" id="burger">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="route">
+      <span class="node">LAHORE, PK</span>
+      <span class="line"></span>
+      <span>PRODUCTION</span>
+      <span class="line"></span>
+      <span class="node">SHIPPED</span>
+    </div>
+    <h1>Muhammad Rashid builds backend systems<br>that <span>move real orders.</span></h1>
+    <div class="role mono">Software Engineer · Senior PHP / Laravel Developer</div>
+    <p class="desc">5+ years shipping commercial SaaS platforms in e-commerce, agriculture, affiliate marketing and utilities — architecting REST APIs, wiring up Amazon SP API / eBay marketplaces, and keeping DPD, DHL and courier integrations running on schedule.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn primary">Let's talk →</a>
+      <a href="#work" class="btn ghost">View work</a>
+      <span class="stamp">In transit since 2019</span>
+    </div>
+    <div class="hero-meta">
+      <div class="stat"><b>5+</b><span>Years Experience</span></div>
+      <div class="stat"><b>13+</b><span>Projects Shipped</span></div>
+      <div class="stat"><b>1,000+</b><span>Transactions / Month</span></div>
+      <div class="stat"><b>500+</b><span>Daily Active Users</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Manifest / 01</div><h2>What I work with</h2></div>
+      <p>Backend-first stack, hardened by years of live marketplace and courier integrations.</p>
+    </div>
+    <div class="skill-grid reveal">
+      <div class="skill-cat">
+        <h3>Core Backend</h3>
+        <div class="tags"><span>Laravel</span><span>PHP</span><span>CodeIgniter</span><span>OOP</span><span>MySQL</span><span>DB Design</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>APIs &amp; Auth</h3>
+        <div class="tags"><span>REST APIs</span><span>Sanctum</span><span>Passport</span><span>Cron Jobs</span><span>Payment APIs</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Marketplace &amp; Logistics</h3>
+        <div class="tags"><span>Amazon SP API</span><span>eBay API</span><span>DPD</span><span>DPD UK</span><span>DHL Parcel</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Frontend</h3>
+        <div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span><span>WordPress</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Tooling</h3>
+        <div class="tags"><span>Git</span><span>GitLab</span><span>Code Review</span><span>Agile</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Currently Exploring</h3>
+        <div class="tags"><span>Vue.js</span><span>Node.js</span><span>MongoDB</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Manifest / 02</div><h2>Featured shipments</h2></div>
+      <p>Production platforms with real transaction volume, not demos.</p>
+    </div>
+
+    <div class="manifest reveal">
+      <div class="manifest-top">
+        <span class="manifest-id">TRACKING · AP-SAAS-01</span>
+        <span class="stamp onlight">Live</span>
+      </div>
+      <div class="manifest-body">
+        <h3>AffiliatePro SaaS</h3>
+        <p>Multi-tenant affiliate marketing platform — isolated tenant data, commission tracking and reporting for multiple affiliate programs running on one codebase.</p>
+        <div class="manifest-tags"><span>Laravel</span><span>MySQL</span><span>Multi-tenant</span><span>REST APIs</span></div>
+      </div>
+    </div>
+
+    <div class="manifest reveal">
+      <div class="manifest-top">
+        <span class="manifest-id">TRACKING · STK-KNCT-02</span>
+        <span class="stamp onlight">Live</span>
+      </div>
+      <div class="manifest-body">
+        <h3>Stock Konnect</h3>
+        <p>Inventory and stock management system built for multi-location tracking — stock movement, low-stock alerts and reconciliation across warehouses.</p>
+        <div class="manifest-tags"><span>Laravel</span><span>MySQL</span><span>Inventory</span></div>
+      </div>
+    </div>
+
+    <div class="manifest reveal">
+      <div class="manifest-top">
+        <span class="manifest-id">TRACKING · SOIL-ANLY-03</span>
+        <span class="stamp onlight">Live</span>
+      </div>
+      <div class="manifest-body">
+        <h3>Soil Analysis Platform</h3>
+        <p>Agriculture-tech platform processing soil sample data into actionable reports for farmers and agronomists, backed by a REST API layer.</p>
+        <div class="manifest-tags"><span>Laravel</span><span>MySQL</span><span>REST APIs</span></div>
+      </div>
+    </div>
+
+    <div class="manifest reveal">
+      <div class="manifest-top">
+        <span class="manifest-id">TRACKING · ORINAS-04</span>
+        <span class="stamp muted">Maintainer</span>
+      </div>
+      <div class="manifest-body">
+        <h3>Orinas &amp; Orinas Web</h3>
+        <p>Full-stack multi-tenant affiliate marketing platform — maintainer role owning code reviews, merge requests and coding standards.</p>
+        <div class="manifest-tags"><span>Laravel</span><span>Full-stack</span><span>Maintainer</span></div>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:70px;">
+      <div><div class="eyebrow">Manifest / 03</div><h2>More shipped work</h2></div>
+      <p>Client sites, utility tools and earlier commercial projects.</p>
+    </div>
+    <div class="archive-grid reveal">
+      <div class="archive-card">
+        <h4>Wedrings.org</h4>
+        <div class="tags"><span>Laravel</span><span>MySQL</span><span>REST API</span></div>
+        <a class="live" href="https://wedrings.org" target="_blank" rel="noopener">Live product →</a>
+      </div>
+      <div class="archive-card">
+        <h4>bizmarketplace</h4>
+        <div class="tags"><span>Laravel</span><span>MySQL</span><span>REST API</span></div>
+      </div>
+      <div class="archive-card">
+        <h4>structurepackaging.com</h4>
+        <div class="tags"><span>Laravel</span><span>MySQL</span><span>REST API</span></div>
+        <a class="live" href="https://structurepackaging.com" target="_blank" rel="noopener">Live product →</a>
+      </div>
+      <div class="archive-card">
+        <h4>polarcream.com / POS</h4>
+        <div class="tags"><span>Laravel</span><span>MySQL</span><span>REST API</span></div>
+        <a class="live" href="https://polarcream.com" target="_blank" rel="noopener">Live product →</a>
+      </div>
+      <div class="archive-card">
+        <h4>UPTCL Ticket System</h4>
+        <div class="tags"><span>Utility</span><span>Support Ticketing</span></div>
+      </div>
+      <div class="archive-card">
+        <h4>E-Commerce Store</h4>
+        <div class="tags"><span>Laravel</span><span>Full-featured</span></div>
+      </div>
+      <div class="archive-card">
+        <h4>Dry Clean Management System</h4>
+        <div class="tags"><span>Order Tracking</span><span>Billing</span></div>
+      </div>
+      <div class="archive-card">
+        <h4>Hospital Mgmt System + QR</h4>
+        <div class="tags"><span>Final Year Project</span><span>QR Integration</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Manifest / 04</div><h2>Where I've worked</h2></div>
+      <p>Route from internship to senior backend ownership.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-date">Oct 2021 — Present · Lahore, Pakistan</div>
+        <h3>Software Engineer</h3>
+        <div class="company">Green Origin</div>
+        <ul>
+          <li>Design and develop scalable web applications and SaaS platforms using Laravel, CodeIgniter and MySQL.</li>
+          <li>Build and maintain RESTful APIs consumed by web and mobile front-ends, serving 500+ daily active users.</li>
+          <li>Architect and optimize relational database schemas, improving query performance by 30–40% through indexing.</li>
+          <li>Develop and maintain Amazon SP API and eBay API integrations for marketplace order management, inventory sync and listing automation.</li>
+          <li>Integrate courier and shipping portals — DPD, DPD UK, DHL Parcel — for automated shipment creation and tracking.</li>
+          <li>Integrate payment gateways (Stripe, PayPal), processing 1,000+ transactions monthly.</li>
+          <li>Serve as maintainer on key projects — code reviews, merge requests, coding standards.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Feb 2021 — Aug 2021 · Lahore, Pakistan</div>
+        <h3>Laravel Developer</h3>
+        <div class="company">Tricosmic</div>
+        <ul>
+          <li>Wrote clean, secure and maintainable PHP/Laravel code following industry best practices.</li>
+          <li>Validated cross-platform consistency of HTML, CSS and JavaScript across major browsers.</li>
+          <li>Diagnosed and resolved application bugs, reducing reported issues by ~25%.</li>
+          <li>Designed and maintained relational databases and documented architecture decisions.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Sep 2019 — Dec 2020 · Lahore, Pakistan</div>
+        <h3>Laravel Developer</h3>
+        <div class="company">Solstice Solution</div>
+        <ul>
+          <li>Designed and developed server-side logic and reusable Laravel modules for multiple client projects.</li>
+          <li>Integrated third-party APIs and payment gateways, reducing manual processing time significantly.</li>
+          <li>Consistently met daily and sprint milestones, contributing to on-time delivery.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Feb 2019 — Jul 2019 · Lahore, Pakistan</div>
+        <h3>Laravel Developer (Internship)</h3>
+        <div class="company">Technologists Solution</div>
+        <ul>
+          <li>Built CRUD systems with Eloquent ORM, database migrations and Bootstrap front-end templates.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Manifest / 05</div><h2>Education</h2></div>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <h3>BSc Computer Science</h3>
+        <div class="school">University of the Punjab</div>
+        <div class="courses">C++, OOP, Data Structures, DBMS, Theory of Automata, Analysis of Algorithms. Final Year Project: Hospital Management System with QR Code Integration.</div>
+      </div>
+      <div class="date">Sep 2016 — Mar 2021<br>Lahore, Pakistan</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-sec">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="eyebrow onlight">Manifest / 06</div>
+        <h2 style="font-size:clamp(26px,3.4vw,38px);font-weight:800;">Get in touch</h2>
+        <p style="margin-top:14px;max-width:400px;">Have a Laravel platform to build, an API integration to untangle, or a system to scale? Send a note.</p>
+        <div class="langs">
+          <div class="lang"><b>English</b><span>Full Professional</span></div>
+          <div class="lang"><b>Urdu</b><span>Full Professional</span></div>
+          <div class="lang"><b>Punjabi</b><span>Native</span></div>
+        </div>
+      </div>
+      <div class="contact-list reveal">
+        <a href="mailto:m.rashidilyas776@gmail.com">Email <span>m.rashidilyas776@gmail.com</span></a>
+        <a href="tel:+923224324944">Phone <span>+92 322 432 4944</span></a>
+        <a href="https://linkedin.com/in/rashid-ilyas-7b2889200" target="_blank" rel="noopener">LinkedIn <span>rashid-ilyas</span></a>
+        <a href="https://github.com/RashidIlyas" target="_blank" rel="noopener">GitHub <span>@RashidIlyas</span></a>
+        <a href="https://gitlab.com/m.rashidilyas776" target="_blank" rel="noopener">GitLab <span>@m.rashidilyas776</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Muhammad Rashid. Built with Laravel-grade attention to detail.</footer>
+
+<script>
+  document.getElementById('burger').addEventListener('click', function(){
+    document.getElementById('navlinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.navlinks a').forEach(a=>{
+    a.addEventListener('click', ()=> document.getElementById('navlinks').classList.remove('open'));
+  });
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  window.addEventListener('scroll', function(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress').style.width = scrolled + '%';
+  });
+</script>
+
+</body>
+</html>
